@@ -1,0 +1,4 @@
+1.111.111-1,Pablo,Rios,100000,Ovalle
+9.999.999-9,Felipe,Rios,500000,Coquimbo
+8.888.888-8,Maria,Rios,200000,Ovalle
+7.777.777-7,Jose,Rios, 150000,Coquimbo
