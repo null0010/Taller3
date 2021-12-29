@@ -32,7 +32,7 @@ public class Main {
 				}
 			}
 			else {
-				System.out.println("Panel de registrar");
+				System.out.println("Panel de registro");
 				System.out.print("Ingrese su nombre: ");
 				String nombre = input.next();
 				System.out.print("Ingrese su apellido: ");
