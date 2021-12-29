@@ -72,6 +72,21 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 			throw new NullPointerException("El Cliente remitente y/o destinatario no existen.");
 		}
 
+
+		for (Localizacion localizacion : listaLocalizaciones) {
+			if (localizacion.getNombre().equals(clienteRemitente.getCiudadOrigen().getNombre())) {
+				localizacion.setCantidadEntregasEnviadas(localizacion.getCantidadEntregasEnviadas() + 1);
+				break;
+			}
+		}
+
+		for (Localizacion localizacion : listaLocalizaciones) {
+			if (localizacion.getNombre().equals(clienteDestinatario.getCiudadOrigen().getNombre())) {
+				localizacion.setCantidadEntregasRecibidas(localizacion.getCantidadEntregasRecibidas() + 1);
+				break;
+			}
+		}
+
 		Documento documento = new Documento(codigo, clienteRemitente, clienteDestinatario, peso, grosor);
 		clienteRemitente.getListaEntregasEnviadas().agregarUltimo(documento);
 		clienteDestinatario.getListaEntregasRecibidas().agregarUltimo(documento);
@@ -102,6 +117,20 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 			throw new NullPointerException("El Cliente remitente y/o destinatario no existen.");
 		}
 
+		for (Localizacion localizacion : listaLocalizaciones) {
+			if (localizacion.getNombre().equals(clienteRemitente.getCiudadOrigen().getNombre())) {
+				localizacion.setCantidadEntregasEnviadas(localizacion.getCantidadEntregasEnviadas() + 1);
+				break;
+			}
+		}
+
+		for (Localizacion localizacion : listaLocalizaciones) {
+			if (localizacion.getNombre().equals(clienteDestinatario.getCiudadOrigen().getNombre())) {
+				localizacion.setCantidadEntregasRecibidas(localizacion.getCantidadEntregasRecibidas() + 1);
+				break;
+			}
+		}
+
 		Encomienda encomienda = new Encomienda(codigo, clienteRemitente, clienteDestinatario, peso, largo, ancho, profundidad);
 		clienteRemitente.getListaEntregasEnviadas().agregarUltimo(encomienda);
 		clienteDestinatario.getListaEntregasRecibidas().agregarUltimo(encomienda);
@@ -130,6 +159,20 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 
 		if (clienteRemitente == null || clienteDestinatario == null) {
 			throw new NullPointerException("El Cliente remitente y/o destinatario no existen.");
+		}
+
+		for (Localizacion localizacion : listaLocalizaciones) {
+			if (localizacion.getNombre().equals(clienteRemitente.getCiudadOrigen().getNombre())) {
+				localizacion.setCantidadEntregasEnviadas(localizacion.getCantidadEntregasEnviadas() + 1);
+				break;
+			}
+		}
+
+		for (Localizacion localizacion : listaLocalizaciones) {
+			if (localizacion.getNombre().equals(clienteDestinatario.getCiudadOrigen().getNombre())) {
+				localizacion.setCantidadEntregasRecibidas(localizacion.getCantidadEntregasRecibidas() + 1);
+				break;
+			}
 		}
 
 		Valija valija = new Valija(codigo, clienteRemitente, clienteDestinatario, peso, material);
@@ -224,6 +267,12 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 				haveSaldoSuficiente = (saldo - precioDocumento) >= 0;
 				if (haveSaldoSuficiente) {
 					cliente.setSaldo(saldo - precioDocumento);
+					for (Localizacion localizacion : listaLocalizaciones) {
+						if (localizacion.getNombre().equals(cliente.getCiudadOrigen().getNombre())) {
+							localizacion.setGanancias(localizacion.getGanancias() + precioDocumento);
+							break;
+						}
+					}
 				}
 				break;
 			}
@@ -246,6 +295,12 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 
 				if (haveSaldoSuficiente) {
 					cliente.setSaldo(saldo - precioEncomienda);
+					for (Localizacion localizacion : listaLocalizaciones) {
+						if (localizacion.getNombre().equals(cliente.getCiudadOrigen().getNombre())) {
+							localizacion.setGanancias(localizacion.getGanancias() + precioEncomienda);
+							break;
+						}
+					}
 				}
 
 				break;
@@ -268,6 +323,12 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 				haveSaldoSuficiente = (saldo - precioValija) >= 0;
 				if (haveSaldoSuficiente) {
 					cliente.setSaldo(saldo - precioValija);
+					for (Localizacion localizacion : listaLocalizaciones) {
+						if (localizacion.getNombre().equals(cliente.getCiudadOrigen().getNombre())) {
+							localizacion.setGanancias(localizacion.getGanancias() + precioValija);
+							break;
+						}
+					}
 				}
 
 				break;
@@ -316,5 +377,47 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 		}
 
 		return salida;
+	}
+
+	public String obtenerEntregasPorLocalizacion() {
+		String salida = "";
+		for (int i = 0; i < listaLocalizaciones.size(); i++) {
+			Localizacion localizacion = listaLocalizaciones.get(i);
+			salida += localizacion.getNombre()
+					+ " realizo "
+					+ localizacion.getCantidadEntregasEnviadas()
+					+ " envíos y recibió "
+					+ localizacion.getCantidadEntregasRecibidas()
+					+ "envíos\n";
+		}
+
+
+		return salida;
+
+	}
+
+	@Override
+	public String obtenerGananciasOficinasStarkon() {
+		String salida = "";
+		for (int i = 0; i < listaLocalizaciones.size(); i++) {
+			Localizacion localizacion = listaLocalizaciones.get(i);
+			salida += localizacion.getNombre()
+					+ ", "
+					+ localizacion.getGanancias()
+					+ "\n";
+		}
+
+		return salida;
+	}
+
+	@Override
+	public double obtenerBalanceTotalOficinasStarkon() {
+		double total = 0;
+		for (int i = 0; i < listaLocalizaciones.size(); i++) {
+			Localizacion localizacion = listaLocalizaciones.get(i);
+			total += localizacion.getGanancias();
+		}
+
+		return total;
 	}
 }
