@@ -87,29 +87,44 @@ public class ListaEntregasDobleNexoCircular {
 			int codigo = entrega.getCodigo();
 			String rutClienteRemitente = entrega.getClienteRemitente().getRut();
 			String rutClienteDestinatario = entrega.getClienteDestinatario().getRut();
-			salida += codigo + "," + rutClienteRemitente + ", " + rutClienteDestinatario + ","; 
+			salida += codigo + ", ";
 			if (entrega instanceof Documento) {
 				Documento documento = (Documento) entrega;
-				salida += documento.getPeso() 
-						+ "," + documento.getGrosor() 
+				salida += "D, "
+						+ rutClienteRemitente
+						+ ", "
+						+ rutClienteRemitente
+						+ ", "
+						+ documento.getPeso()
+						+ ", " + documento.getGrosor()
 						+ "\n";
 			}
 			else if (entrega instanceof Encomienda) {
 				Encomienda encomienda = (Encomienda) entrega;
-				salida += encomienda.getPeso() 
+				salida += "E, "
+						+ rutClienteRemitente
+						+ ", "
+						+ rutClienteRemitente
+						+ ", "
+						+ encomienda.getPeso()
 						+ ", " 
 						+ encomienda.getLargo() 
-						+ "," 
+						+ ", "
 						+ encomienda.getAncho() 
-						+ "," 
+						+ ", "
 						+ encomienda.getProfundidad() 
 						+ "\n";
 			}
 		 
 			else if (entrega instanceof Valija) {
 				Valija valija = (Valija) entrega;
-				salida += valija.getMaterial() 
-						+ ","
+				salida += "V, "
+						+ rutClienteRemitente
+						+ ", "
+						+ rutClienteRemitente
+						+ ", "
+					    + valija.getMaterial()
+						+ ", "
 						+ valija.getPeso()
 						+ "\n";
 			}
