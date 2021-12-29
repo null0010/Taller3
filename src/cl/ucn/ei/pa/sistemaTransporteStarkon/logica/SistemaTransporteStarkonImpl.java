@@ -170,7 +170,7 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 
 	@Override
 	public boolean isTipoEntregaPermitido(String nombreTipoEntrega) {
-		return nombreTipoEntrega.equals("D") || nombreTipoEntrega.equals("E") || nombreTipoEntrega.equals("V");
+		return !nombreTipoEntrega.equals("D") && !nombreTipoEntrega.equals("E") && !nombreTipoEntrega.equals("V");
 	}
 
 	@Override
