@@ -28,7 +28,7 @@ public class Main {
 					isAppRun = false;
 				}
 				else {
-					System.out.println("Contraseña incorrecta.");
+					System.out.println("Rut y/o contraseña incorrecta.");
 				}
 			}
 			else {
@@ -81,9 +81,9 @@ public class Main {
 					break;
 
 				case 5:
-				isCorriendoMenuAdmin = false;
-				System.out.println("Cerrando sistema...");
-				break;
+					isCorriendoMenuAdmin = false;
+					System.out.println("Cerrando sistema...");
+					break;
 			}
 		}
 	}
