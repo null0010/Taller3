@@ -129,6 +129,7 @@ public class Main {
 					break;
 
 				case 4:
+					isCorriendoMenuCliente = false;
 					System.out.println("Cerrando sistema...");
 					break;
 			}
