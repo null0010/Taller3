@@ -28,6 +28,17 @@ public class Main {
 					isAppRun = false;
 				}
 			}
+			else {
+				System.out.println("Panel de registrar");
+				System.out.print("Ingrese su nombre: ");
+				String nombre = input.next();
+				System.out.print("Ingrese su apellido: ");
+				String apellido = input.next();
+				System.out.print("Ingrese su ciudad de origen: ");
+				String ciudadOrigen = input.next();
+				sistema.ingresarCliente(rut, nombre, apellido, 0, ciudadOrigen);
+				System.out.println("Se ha registrado exitosamente, vuelva a iniciar sesión.");
+			}
 		}
 
 		sobrescribirCliente(sistema);
