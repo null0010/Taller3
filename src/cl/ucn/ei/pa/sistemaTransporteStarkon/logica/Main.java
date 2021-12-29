@@ -24,8 +24,11 @@ public class Main {
 				System.out.print("Ingrese contrasena: ");
 				String contrasena = input.next();
 				if (sistema.isContrasenaAdministradorCorrecta(contrasena)) {
-
+					corriendoMenuAdmin(sistema, input);
 					isAppRun = false;
+				}
+				else {
+					System.out.println("Contraseña incorrecta.");
 				}
 			}
 			else {
@@ -45,6 +48,46 @@ public class Main {
 		sobrescribirArchivoEntrega(sistema);
 		input.close();
 	}
+
+	public static void corriendoMenuAdmin(SistemaTransporteStarkon sistema, Scanner input) {
+		boolean isCorriendoMenuAdmin = true;
+		while (isCorriendoMenuAdmin) {
+			System.out.println("[Menu Administrador]");
+			System.out.println("1) Entregas por tipo.");
+			System.out.println("2) Entregas por localización.");
+			System.out.println("3) Entregas por cliente.");
+			System.out.println("4) Registro de ganancias.");
+			System.out.println("5) Cerrar sistema.");
+			System.out.print("Ingrese una opcion: ");
+			int opcion = input.nextInt();
+			switch (opcion) {
+				case 1:
+					//ds
+					break;
+
+				case 2:
+					System.out.println(sistema.obtenerEntregasPorLocalizacion());
+					break;
+
+				case 3:
+					System.out.println(sistema.obtenerDatosActualizadosClientes());
+					break;
+
+				case 4:
+					System.out.println("Ganancias oficinas");
+					System.out.println(sistema.obtenerGananciasOficinasStarkon());
+					System.out.println("Balance total");
+					System.out.println(sistema.obtenerBalanceTotalOficinasStarkon());
+					break;
+
+				case 5:
+				isCorriendoMenuAdmin = false;
+				System.out.println("Cerrando sistema...");
+				break;
+			}
+		}
+	}
+
 
 	public static void corriendoMenuCliente(SistemaTransporteStarkon sistema, Scanner input, String rut) {
 		boolean isCorriendoMenuCliente = true;
