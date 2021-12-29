@@ -388,7 +388,7 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 					+ localizacion.getCantidadEntregasEnviadas()
 					+ " envíos y recibió "
 					+ localizacion.getCantidadEntregasRecibidas()
-					+ "envíos\n";
+					+ " envíos\n";
 		}
 
 
