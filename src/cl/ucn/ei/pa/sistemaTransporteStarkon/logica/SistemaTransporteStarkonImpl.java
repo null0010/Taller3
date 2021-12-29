@@ -28,7 +28,7 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 	}
 
 	@Override
-	public boolean ingresarCliente(String rut, String nombre, String apellido, int saldo, String ciudadOrigen) {
+	public boolean ingresarCliente(String rut, String nombre, String apellido, double saldo, String ciudadOrigen) {
 		Cliente cliente = null;
 		boolean canRealizarEntrega = false;
 		for (Localizacion localizacion : listaLocalizaciones) {
@@ -289,6 +289,32 @@ public class SistemaTransporteStarkonImpl implements SistemaTransporteStarkon {
 				break;
 			}
 		}
+		return salida;
+	}
+
+	@Override
+	public String obtenerDatosActualizadosEntregas() {
+		return listaEntregas.toString();
+	}
+
+
+	@Override
+	public String obtenerDatosActualizadosClientes() {
+		String salida = "";
+		for (int i = 0; i < listaClientes.size(); i++) {
+			Cliente cliente = listaClientes.get(i);
+			salida += cliente.getRut()
+					+ ", "
+					+ cliente.getNombre()
+					+ ", "
+					+ cliente.getApellido()
+					+ ", "
+					+ cliente.getSaldo()
+					+ ", "
+					+ cliente.getCiudadOrigen().getNombre()
+					+ "\n";
+		}
+
 		return salida;
 	}
 }
