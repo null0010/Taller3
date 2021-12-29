@@ -17,7 +17,7 @@ public interface SistemaTransporteStarkon {
 	 * @param ciudadOrigen Ciudad de origen del cliente
 	 * @return boolean
 	 */
-	boolean ingresarCliente(String rut, String nombre, String apellido, int saldo, String ciudadOrigen);
+	boolean ingresarCliente(String rut, String nombre, String apellido, double saldo, String ciudadOrigen);
 
 	/**
 	 * Se ingresa un documento a la lista general de entregas.
@@ -160,7 +160,20 @@ public interface SistemaTransporteStarkon {
 	/**
 	 * Se obtienen todas las entregas que ha realizado el cliente.
 	 * @param rutCliente El rut del cliente
-	 * @return boolean
+	 * @return String
 	 */
 	String obtenerEntregasCliente(String rutCliente);
+
+
+	/**
+	 * Se obtienen todos los datos de las entregas del sistema.
+	 * @return String
+	 */
+	String obtenerDatosActualizadosEntregas();
+
+	/**
+	 * Se obtienen todos los datos de los clientes del sistema.
+	 * @return String
+	 */
+	String obtenerDatosActualizadosClientes();
 }
