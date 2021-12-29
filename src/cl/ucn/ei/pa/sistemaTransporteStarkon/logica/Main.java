@@ -70,7 +70,7 @@ public class Main {
 					break;
 
 				case 3:
-					System.out.println(sistema.obtenerDatosActualizadosClientes());
+					System.out.println(sistema.obtenerDatosActualizadosEntregas());
 					break;
 
 				case 4:
