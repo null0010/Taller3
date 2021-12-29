@@ -47,8 +47,8 @@ public class Main {
 				case 1:
 					System.out.print("Ingrese la primera letra del tipo de entrega (D)ocumento | (E)ncomienda | (V)alija: ");
 					String nombreTipoEntrega = input.next().toUpperCase();
-					while (!sistema.isTipoEntregaPermitido(nombreTipoEntrega)) {
-						if (!sistema.isTipoEntregaPermitido(nombreTipoEntrega)) {
+					while (sistema.isTipoEntregaPermitido(nombreTipoEntrega)) {
+						if (sistema.isTipoEntregaPermitido(nombreTipoEntrega)) {
 							System.out.print("Entrega no disponible, intentelo de nuevo.");
 						}
 
