@@ -12,7 +12,7 @@ public class Cliente  {
 	private ListaEntregasDobleNexoCircular listaEntregasEnviadas;
 	private ListaEntregasDobleNexoCircular listaEntregasRecibidas;
 	
-	public Cliente(String rut, String nombre, String apellido, int saldo, Localizacion ciudadOrigen) {
+	public Cliente(String rut, String nombre, String apellido, double saldo, Localizacion ciudadOrigen) {
 		super();
 		this.rut = rut;
 		this.nombre = nombre;
