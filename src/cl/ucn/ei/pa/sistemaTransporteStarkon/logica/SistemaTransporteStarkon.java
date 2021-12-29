@@ -176,4 +176,22 @@ public interface SistemaTransporteStarkon {
 	 * @return String
 	 */
 	String obtenerDatosActualizadosClientes();
+
+	/**
+	 * Se obtienen todas las entregas de cada una de las localizaciones.
+	 * @return String
+	 */
+	String obtenerEntregasPorLocalizacion();
+
+	/**
+	 * Se obtiene la ganancia de cada una de las oficinas de starkon.
+	 * @return
+	 */
+	String obtenerGananciasOficinasStarkon();
+
+	/**
+	 * Se obtiene el balance total de todas las oficinas de starkon.
+	 * @return
+	 */
+	double obtenerBalanceTotalOficinasStarkon();
 }
