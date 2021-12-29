@@ -11,7 +11,7 @@ public class Main {
 		cargarLocalizaciones(sistema);
 		cargarClientes(sistema);
 		cargarEntregas(sistema);
-		
+
 		boolean isAppRun = true;
 		while (isAppRun) {
 			System.out.print("Ingrese rut: ");
@@ -21,25 +21,25 @@ public class Main {
 				isAppRun = false;
 			}
 			else if (sistema.isUsuarioAdministrador(rut)) {
-				System.out.print("Ingrese contraseña: ");
-				String contraseña = input.next();
-				if (sistema.isContraseñaAdministradorCorrecta(contraseña)) {
-					
+				System.out.print("Ingrese contrasena: ");
+				String contrasena = input.next();
+				if (sistema.isContrasenaAdministradorCorrecta(contrasena)) {
+
 					isAppRun = false;
-				}	
+				}
 			}
 		}
-	
+
 		input.close();
 	}
-	
+
 	public static void corriendoMenuCliente(SistemaTransporteStarkon sistema, Scanner input, String rut) {
 		boolean isCorriendoMenuCliente = true;
 		while (isCorriendoMenuCliente) {
 			System.out.println("[Menu cliente]");
 			System.out.println("1) Realizar una entrega.");
 			System.out.println("2) Recargar saldo.");
-			System.out.println("3) Ver tus entregas.");	
+			System.out.println("3) Ver tus entregas.");
 			System.out.println("4) Cerrar sistema.");
 			System.out.print("Ingrese una opcion: ");
 			int opcion = input.nextInt();
@@ -51,16 +51,16 @@ public class Main {
 						if (!sistema.isTipoEntregaPermitido(nombreTipoEntrega)) {
 							System.out.print("Entrega no disponible, intentelo de nuevo.");
 						}
-						
+
 						System.out.print("Ingrese la primera letra del tipo de entrega (D)ocumento | (E)ncomienda | (V)alija: ");
 						nombreTipoEntrega = input.next().toUpperCase();
 					}
 
-					int codigoEntrega = generarCodigoAleatorio(100000, 999999);	
+					int codigoEntrega = generarCodigoAleatorio(100000, 999999);
 					while (!sistema.isAllCodigosOcupados() && !sistema.isCodigoEntregaOcupado(codigoEntrega)) {
 						codigoEntrega = generarCodigoAleatorio(100000, 999999);
 					}
-					
+
 					if (!sistema.isAllCodigosOcupados()) {
 						if (sistema.canClienteEnviarEntregas(rut)) {
 							System.out.print("Ingrese el rut del destinatario: ");
@@ -77,7 +77,7 @@ public class Main {
 									else {
 										System.out.println("No tienes saldo suficiente");
 									}
-									
+
 								}
 								else if (sistema.isTipoEntregaEncomienda(nombreTipoEntrega)) {
 									System.out.print("Ingrese el largo de la entrega: ");
@@ -115,26 +115,26 @@ public class Main {
 					else {
 						System.out.println("Lo siento, no hay codigo de entregas disponible");
 					}
-					
+
 					break;
-			
+
 				case 2:
 					System.out.print("Ingrese la cantidad de recarga ($): ");
 					int recarga = input.nextInt();
 					sistema.recargarSaldoCliente(rut, recarga);
 					break;
-					
+
 				case 3:
 					System.out.println(sistema.obtenerEntregasCliente(rut));
 					break;
-					
+
 				case 4:
 					System.out.println("Cerrando sistema...");
 					break;
 			}
 		}
 	}
-	
+
 	public static void cargarLocalizaciones(SistemaTransporteStarkon sistema) {
 		File archivoLocalizacion = new File("archivos/Localización.txt");
 		try (Scanner scannerFile = new Scanner(archivoLocalizacion)) {
@@ -142,12 +142,12 @@ public class Main {
 				String nombreCiudad = scannerFile.nextLine();
 				sistema.ingresarLocalizacion(nombreCiudad);
 			}
-		} 
+		}
 		catch (FileNotFoundException exception) {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	public static void cargarClientes(SistemaTransporteStarkon sistema) {
 		File archivoCliente = new File("archivos/Cliente.txt");
 		try (Scanner scannerFile = new Scanner(archivoCliente)) {
@@ -161,12 +161,12 @@ public class Main {
 				String ciudadOrigen = partes[4].trim();
 				sistema.ingresarCliente(rut, nombre, apellido, saldo, ciudadOrigen);
 			}
-		} 
+		}
 		catch (FileNotFoundException exception) {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	public static void cargarEntregas(SistemaTransporteStarkon sistema) {
 		File archivoEntrega = new File("archivos/Entrega.txt");
 		try (Scanner scannerFile = new Scanner(archivoEntrega)) {
@@ -195,13 +195,13 @@ public class Main {
 					sistema.ingresarValija(codigo, rutClienteRemitente, rutClienteDestinatario, peso, material);
 				}
 			}
-		} 
+		}
 		catch (FileNotFoundException exception) {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	public static int generarCodigoAleatorio(int min, int max) {
 		return (int) Math.floor(Math.random()*(max - min + 1) + min);
-	}	
+	}
 }
