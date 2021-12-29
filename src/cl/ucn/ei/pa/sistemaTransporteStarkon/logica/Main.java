@@ -2,6 +2,7 @@ package cl.ucn.ei.pa.sistemaTransporteStarkon.logica;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -11,7 +12,6 @@ public class Main {
 		cargarLocalizaciones(sistema);
 		cargarClientes(sistema);
 		cargarEntregas(sistema);
-
 		boolean isAppRun = true;
 		while (isAppRun) {
 			System.out.print("Ingrese rut: ");
@@ -30,6 +30,8 @@ public class Main {
 			}
 		}
 
+		sobrescribirCliente(sistema);
+		sobrescribirArchivoEntrega(sistema);
 		input.close();
 	}
 
@@ -158,7 +160,7 @@ public class Main {
 				String rut = partes[0].trim();
 				String nombre = partes[1].trim();
 				String apellido = partes[2].trim();
-				int saldo = Integer.parseInt(partes[3].trim());
+				double saldo = Double.parseDouble(partes[3].trim());
 				String ciudadOrigen = partes[4].trim();
 				sistema.ingresarCliente(rut, nombre, apellido, saldo, ciudadOrigen);
 			}
@@ -204,5 +206,23 @@ public class Main {
 
 	public static int generarCodigoAleatorio(int min, int max) {
 		return (int) Math.floor(Math.random()*(max - min + 1) + min);
+	}
+
+	public static void sobrescribirCliente(SistemaTransporteStarkon sistema) {
+		try (FileWriter fileWriter = new FileWriter("archivos/Cliente.txt")) {
+			fileWriter.write(sistema.obtenerDatosActualizadosClientes());
+		}
+		catch (Exception exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	public static void sobrescribirArchivoEntrega(SistemaTransporteStarkon sistema) {
+		try (FileWriter fileWriter = new FileWriter("archivos/Entrega.txt")) {
+			fileWriter.write(sistema.obtenerDatosActualizadosEntregas());
+		}
+		catch (Exception exception) {
+			exception.printStackTrace();
+		}
 	}
 }
